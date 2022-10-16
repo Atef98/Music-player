@@ -1,0 +1,343 @@
+[gd_scene load_steps=32 format=2]
+
+[ext_resource path="res://scripts/main_window.gd" type="Script" id=1]
+[ext_resource path="res://Icons/path48.png" type="Texture" id=2]
+[ext_resource path="res://Icons/amg.png" type="Texture" id=3]
+[ext_resource path="res://Icons/g1160.png" type="Texture" id=4]
+[ext_resource path="res://Icons/path24.png" type="Texture" id=5]
+[ext_resource path="res://Icons/path16.png" type="Texture" id=6]
+[ext_resource path="res://Icons/path128.png" type="Texture" id=7]
+[ext_resource path="res://Icons/path144.png" type="Texture" id=8]
+[ext_resource path="res://Theme/slider.theme" type="Theme" id=10]
+[ext_resource path="res://scripts/sound_container.gd" type="Script" id=11]
+[ext_resource path="res://addons/arabic-text/ALabel.gd" type="Script" id=12]
+[ext_resource path="res://scripts/PlayerLength_container.gd" type="Script" id=13]
+[ext_resource path="res://Icons/g1172.png" type="Texture" id=14]
+[ext_resource path="res://Fonts/MarkaziText-Bold.ttf" type="DynamicFontData" id=15]
+[ext_resource path="res://Shaders/Background.shader" type="Shader" id=16]
+[ext_resource path="res://mainUI/Dialog.tscn" type="PackedScene" id=17]
+[ext_resource path="res://scripts/PlayerControl_Container.gd" type="Script" id=18]
+[ext_resource path="res://mainUI/FileDialog.tscn" type="PackedScene" id=19]
+
+[sub_resource type="DynamicFont" id=2]
+size = 32
+font_data = ExtResource( 15 )
+
+[sub_resource type="Theme" id=1]
+default_font = SubResource( 2 )
+
+[sub_resource type="DynamicFont" id=4]
+resource_local_to_scene = true
+size = 52
+outline_size = 1
+outline_color = Color( 0.427451, 0.427451, 0.427451, 1 )
+use_mipmaps = true
+use_filter = true
+extra_spacing_top = 4
+extra_spacing_bottom = 2
+extra_spacing_char = 2
+extra_spacing_space = 2
+font_data = ExtResource( 15 )
+
+[sub_resource type="StyleBoxFlat" id=11]
+bg_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="Theme" id=12]
+default_font = SubResource( 4 )
+WindowDialog/fonts/title_font = SubResource( 4 )
+WindowDialog/icons/close = null
+WindowDialog/icons/close_highlight = null
+WindowDialog/styles/panel = SubResource( 11 )
+
+[sub_resource type="ShaderMaterial" id=9]
+shader = ExtResource( 16 )
+shader_param/_rot = Transform2D( 0.5, -0.86, 0.86, 0.524, 0, 0 )
+shader_param/_speed = 0.6
+shader_param/_gradation = 0.9
+
+[sub_resource type="Theme" id=8]
+
+[sub_resource type="DynamicFont" id=14]
+size = 38
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 15 )
+
+[sub_resource type="Theme" id=15]
+default_font = SubResource( 14 )
+
+[sub_resource type="ShaderMaterial" id=10]
+
+[sub_resource type="DynamicFont" id=13]
+size = 48
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 15 )
+
+[sub_resource type="DynamicFont" id=16]
+size = 48
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 15 )
+
+[sub_resource type="Theme" id=17]
+default_font = SubResource( 16 )
+
+[node name="PlayerWindow" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+focus_mode = 2
+theme = SubResource( 1 )
+script = ExtResource( 1 )
+
+[node name="PlayerControl_Container" type="HBoxContainer" parent="." groups=["buttons"]]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 53.0
+margin_top = -403.0
+margin_right = -53.0
+margin_bottom = -251.0
+focus_mode = 1
+alignment = 1
+script = ExtResource( 18 )
+
+[node name="Btn_reload" type="Button" parent="PlayerControl_Container" groups=["buttons"]]
+margin_right = 92.0
+margin_bottom = 152.0
+focus_mode = 0
+disabled = true
+icon = ExtResource( 8 )
+flat = true
+icon_align = 1
+
+[node name="Btn_prevuios" type="Button" parent="PlayerControl_Container" groups=["buttons"]]
+margin_left = 96.0
+margin_right = 354.0
+margin_bottom = 152.0
+focus_mode = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+disabled = true
+icon = ExtResource( 6 )
+flat = true
+icon_align = 1
+
+[node name="Btn_play" type="Button" parent="PlayerControl_Container"]
+margin_left = 358.0
+margin_right = 616.0
+margin_bottom = 152.0
+focus_mode = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+icon = ExtResource( 2 )
+flat = true
+icon_align = 1
+expand_icon = true
+
+[node name="Btn_next" type="Button" parent="PlayerControl_Container" groups=["buttons"]]
+margin_left = 620.0
+margin_right = 878.0
+margin_bottom = 152.0
+focus_mode = 0
+size_flags_horizontal = 3
+disabled = true
+icon = ExtResource( 5 )
+flat = true
+icon_align = 1
+
+[node name="Btn_loop" type="Button" parent="PlayerControl_Container" groups=["buttons"]]
+margin_left = 882.0
+margin_right = 974.0
+margin_bottom = 152.0
+focus_mode = 0
+disabled = true
+toggle_mode = true
+icon = ExtResource( 7 )
+flat = true
+
+[node name="FileDialog" parent="." instance=ExtResource( 19 )]
+visible = false
+margin_left = -451.5
+margin_top = -509.5
+margin_right = 451.5
+margin_bottom = 309.5
+theme = SubResource( 12 )
+window_title = "    "
+show_hidden_files = true
+
+[node name="Background" type="ColorRect" parent="."]
+self_modulate = Color( 0.654902, 0.454902, 0.933333, 1 )
+show_behind_parent = true
+material = SubResource( 9 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+focus_mode = 1
+mouse_filter = 2
+size_flags_vertical = 6
+theme = SubResource( 8 )
+
+[node name="Btn_open" type="Button" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -148.0
+margin_top = 64.0
+margin_right = -70.0
+margin_bottom = 164.0
+focus_mode = 0
+enabled_focus_mode = 0
+icon = ExtResource( 4 )
+flat = true
+icon_align = 1
+expand_icon = true
+
+[node name="PlayerLength_container" type="HBoxContainer" parent="."]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = 40.0
+margin_top = 156.0
+margin_right = -40.0
+margin_bottom = 231.0
+focus_mode = 1
+theme = SubResource( 15 )
+custom_constants/separation = 20
+script = ExtResource( 13 )
+
+[node name="Current_time" type="Label" parent="PlayerLength_container"]
+margin_top = 29.0
+margin_right = 66.0
+margin_bottom = 75.0
+grow_horizontal = 0
+grow_vertical = 0
+size_flags_horizontal = 3
+size_flags_vertical = 8
+size_flags_stretch_ratio = 0.08
+text = "0:00"
+align = 1
+autowrap = true
+
+[node name="Player_slider" type="HSlider" parent="PlayerLength_container"]
+margin_left = 86.0
+margin_right = 917.0
+margin_bottom = 75.0
+focus_mode = 1
+size_flags_horizontal = 3
+size_flags_vertical = 1
+theme = ExtResource( 10 )
+max_value = 1.0
+step = 0.001
+editable = false
+ticks_on_borders = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Finish_Time" type="Label" parent="PlayerLength_container"]
+margin_left = 937.0
+margin_top = 29.0
+margin_right = 999.0
+margin_bottom = 75.0
+size_flags_vertical = 8
+text = "0:00"
+align = 2
+
+[node name="PlayerName_container" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -371.0
+margin_top = 209.0
+margin_right = 389.0
+margin_bottom = 969.0
+focus_mode = 1
+mouse_filter = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="PlayerName_container"]
+self_modulate = Color( 0.823529, 0.823529, 0.823529, 1 )
+material = SubResource( 10 )
+margin_right = 760.0
+margin_bottom = 697.0
+size_flags_vertical = 3
+texture = ExtResource( 3 )
+stretch_mode = 4
+
+[node name="Track_name" type="Label" parent="PlayerName_container"]
+margin_top = 701.0
+margin_right = 760.0
+margin_bottom = 760.0
+custom_fonts/font = SubResource( 13 )
+text = "track name"
+align = 1
+valign = 1
+autowrap = true
+script = ExtResource( 12 )
+arabic_input = "track name"
+
+[node name="Sound_container" type="Control" parent="."]
+margin_right = 237.0
+margin_bottom = 629.0
+focus_mode = 1
+mouse_filter = 1
+script = ExtResource( 11 )
+
+[node name="Sound_btn" type="Button" parent="Sound_container"]
+margin_left = 53.0
+margin_top = 64.0
+margin_right = 176.0
+margin_bottom = 188.0
+focus_mode = 0
+mouse_filter = 1
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.5
+enabled_focus_mode = 0
+icon = ExtResource( 14 )
+flat = true
+icon_align = 1
+expand_icon = true
+
+[node name="Sound_slider" type="VSlider" parent="Sound_container"]
+visible = false
+margin_left = 53.0
+margin_top = 237.0
+margin_right = 203.0
+margin_bottom = 586.0
+focus_mode = 0
+mouse_filter = 1
+size_flags_horizontal = 1
+size_flags_vertical = 3
+theme = ExtResource( 10 )
+max_value = 1.0
+step = 0.001
+
+[node name="Popup" parent="." instance=ExtResource( 17 )]
+visible = true
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -540.0
+margin_top = 353.0
+margin_right = 540.0
+margin_bottom = 400.0
+theme = SubResource( 17 )
+
+[node name="Timer" type="Timer" parent="."]
+process_mode = 0
+
+[connection signal="stream_state_change" from="." to="PlayerControl_Container" method="_on_PlayerWindow_stream_state_change"]
+[connection signal="stream_state_change" from="." to="PlayerLength_container" method="_on_PlayerWindow_stream_state_change"]
+[connection signal="pressed" from="PlayerControl_Container/Btn_reload" to="." method="_on_Btn_reload_pressed"]
+[connection signal="pressed" from="PlayerControl_Container/Btn_prevuios" to="." method="_on_Btn_prevuios_pressed"]
+[connection signal="pressed" from="PlayerControl_Container/Btn_play" to="." method="_on_Btn_play_pressed"]
+[connection signal="pressed" from="PlayerControl_Container/Btn_next" to="." method="_on_Btn_next_pressed"]
+[connection signal="pressed" from="PlayerControl_Container/Btn_loop" to="." method="_on_Btn_loop_pressed"]
+[connection signal="toggled" from="PlayerControl_Container/Btn_loop" to="PlayerControl_Container" method="_on_Btn_loop_toggled"]
+[connection signal="file_selected" from="FileDialog" to="." method="_on_FileDialog_file_selected"]
+[connection signal="pressed" from="Btn_open" to="." method="_on_Btn_open_pressed"]
+[connection signal="value_changed" from="PlayerLength_container/Player_slider" to="PlayerLength_container" method="_on_Player_slider_value_changed"]
+[connection signal="focus_exited" from="Sound_container" to="Sound_container" method="_on_Sound_container_focus_exited"]
+[connection signal="pressed" from="Sound_container/Sound_btn" to="Sound_container" method="_on_Sound_btn_pressed"]
+[connection signal="drag_ended" from="Sound_container/Sound_slider" to="Sound_container" method="_on_Sound_slider_drag_ended"]
+[connection signal="value_changed" from="Sound_container/Sound_slider" to="Sound_container" method="_on_Sound_slider_value_changed"]
+[connection signal="timeout" from="Timer" to="PlayerLength_container" method="_on_Timer_timeout"]
