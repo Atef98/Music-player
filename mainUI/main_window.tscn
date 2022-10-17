@@ -14,7 +14,6 @@
 [ext_resource path="res://scripts/PlayerLength_container.gd" type="Script" id=13]
 [ext_resource path="res://Icons/g1172.png" type="Texture" id=14]
 [ext_resource path="res://Fonts/MarkaziText-Bold.ttf" type="DynamicFontData" id=15]
-[ext_resource path="res://Shaders/Background.shader" type="Shader" id=16]
 [ext_resource path="res://mainUI/Dialog.tscn" type="PackedScene" id=17]
 [ext_resource path="res://scripts/PlayerControl_Container.gd" type="Script" id=18]
 [ext_resource path="res://mainUI/FileDialog.tscn" type="PackedScene" id=19]
@@ -49,13 +48,19 @@ WindowDialog/icons/close = null
 WindowDialog/icons/close_highlight = null
 WindowDialog/styles/panel = SubResource( 11 )
 
-[sub_resource type="ShaderMaterial" id=9]
-shader = ExtResource( 16 )
-shader_param/_rot = Transform2D( 0.5, -0.86, 0.86, 0.524, 0, 0 )
-shader_param/_speed = 0.6
-shader_param/_gradation = 0.9
+[sub_resource type="Theme" id=18]
 
-[sub_resource type="Theme" id=8]
+[sub_resource type="Gradient" id=19]
+colors = PoolColorArray( 0.235294, 0.235294, 0.235294, 1, 0, 0, 0, 1 )
+
+[sub_resource type="GradientTexture2D" id=20]
+gradient = SubResource( 19 )
+width = 1080
+height = 1920
+use_hdr = true
+fill = 1
+fill_from = Vector2( 0.528061, 0.509722 )
+fill_to = Vector2( 0.109694, 0.3375 )
 
 [sub_resource type="DynamicFont" id=14]
 size = 38
@@ -166,16 +171,15 @@ theme = SubResource( 12 )
 window_title = "    "
 show_hidden_files = true
 
-[node name="Background" type="ColorRect" parent="."]
-self_modulate = Color( 0.654902, 0.454902, 0.933333, 1 )
+[node name="Background" type="TextureRect" parent="."]
 show_behind_parent = true
-material = SubResource( 9 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 focus_mode = 1
 mouse_filter = 2
 size_flags_vertical = 6
-theme = SubResource( 8 )
+theme = SubResource( 18 )
+texture = SubResource( 20 )
 
 [node name="Btn_open" type="Button" parent="."]
 anchor_left = 1.0
